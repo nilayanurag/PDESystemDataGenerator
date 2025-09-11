@@ -1,0 +1,30 @@
+name: pdejax
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+  -
+dependencies:
+  - python=3.11
+  - pip
+
+  # Numeric + Sci
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - tqdm
+  - h5py
+
+  # Dev & tooling
+  - pytest
+  - jupyter
+  - ipykernel
+
+  - pip:
+      - torch
+      - torchvision
+      - torchaudio
+      - "jax[cuda12]"
+      - jaxlib
+      - phiflow
