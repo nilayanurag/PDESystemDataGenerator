@@ -23,7 +23,7 @@ if __name__ == '__main__':
             viscosity=visc,
             rel_tol=1e-4,
             max_iterations_integrator=10000,
-            time_steps=100,
+            time_steps=2000,
             dt_step=0.2,
             domain_size_x=(0, 20),
             domain_size_y=(0, 10),
