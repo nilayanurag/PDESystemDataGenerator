@@ -10,8 +10,6 @@ if __name__ == '__main__':
     STATE = "sim"
     NAVIER_STROKES_2D_H5_FILENAME = "navier_strokes_2d_cylinder_wake.h5"
 
-    re=300
-
     re_list=[100,200,300,400,500,600,700,800,900,1000]
     for each_re in re_list:
         visc=1.0/each_re
@@ -38,7 +36,7 @@ if __name__ == '__main__':
             animate=True
         )
         ret=append_experiment(folder_path=DATASTORE_FOLDER_NAME, filename=NAVIER_STROKES_2D_H5_FILENAME,
-                          data_dict=sim_data,group_name=f"NS_{int(re)}", extra_attrs=sim_meta_data)
+                          data_dict=sim_data,group_name=f"NS_{int(each_re)}", extra_attrs=sim_meta_data)
 
     # elif STATE == "animate":
     #     loaded_data = h5_load_file(folder_path=DATASTORE_FOLDER_NAME, filename=NAVIER_STROKES_2D_H5_FILENAME)
