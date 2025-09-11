@@ -59,6 +59,7 @@ def append_experiment(folder_path,data_dict, filename="navier_strokes_2d_cylinde
         group_name (str): Name of the created experiment group.
     """
     file_path = Path(folder_path) / filename
+    file_path.parent.mkdir(parents=True, exist_ok=True)
     with h5py.File(file_path, "a") as f:
         # automatic group name
         idx = len(f.keys())

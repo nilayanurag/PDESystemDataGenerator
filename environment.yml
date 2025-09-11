@@ -14,7 +14,7 @@ dependencies:
   - matplotlib
   - tqdm
   - h5py
-
+  - ffmpeg
   # Dev & tooling
   - pytest
   - jupyter
