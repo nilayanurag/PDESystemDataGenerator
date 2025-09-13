@@ -1,10 +1,10 @@
 import pickle
-
 from phi.jax.flow import *
 from tqdm import trange
 from pathlib import Path
 
 from src.plotting.plotter import animate_quiver,animate_speed,custom_plot,sanity_check_vx,plot_curl
+from src.utils.save_data import append_experiment
 
 
 def get_numpy_vx_vy_p(v_trj_2d, p_trj_2d):
@@ -107,3 +107,34 @@ def simulate_save_ns(
     if animate:
         animate_speed(vx_np, vy_np, interval=40, save_path=animation_path,animation_title=reynolds_number_title)
     return save_data, meta_data
+
+
+
+def run_navier_strokes_2d(reynolds_number,DATASTORE_FOLDER_NAME="dataset",NAVIER_STROKES_2D_H5_FILENAME="navier_strokes_2d_cylinder_wake.h5"):
+
+    visc=1.0/reynolds_number
+    sim_data,sim_meta_data=simulate_save_ns(
+        initial_placeholder_velocity=(1, 0.0, 0.0),
+        inflow_initial_velocity_x=1.0,
+        inflow_initial_velocity_y=0.0,
+        inflow_initial_velocity_z=0.0,
+        viscosity=visc,
+        rel_tol=1e-4,
+        max_iterations_integrator=10000,
+        time_steps=2000,
+        dt_step=0.1,
+        domain_size_x=(0, 20),
+        domain_size_y=(0, 10),
+        domain_size_z=(0, 5),
+        grid_x=256,
+        grid_y=128,
+        grid_z=8,
+        cylinder_radius=0.5,
+        cylinder_y=5,
+        cylinder_x=3,
+        plot_folder="plots",
+        animate=True
+    )
+    ret=append_experiment(folder_path=DATASTORE_FOLDER_NAME, filename=NAVIER_STROKES_2D_H5_FILENAME,
+                      data_dict=sim_data,group_name=f"NS_{int(reynolds_number)}", extra_attrs=sim_meta_data)
+    return sime_data

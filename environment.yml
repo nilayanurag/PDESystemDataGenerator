@@ -19,7 +19,7 @@ dependencies:
   - pytest
   - jupyter
   - ipykernel
-
+  - typer
   - pip:
       - torch
       - torchvision
